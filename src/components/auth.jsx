@@ -15,7 +15,7 @@ export async function RegisterUser(firstName, lastName, email, password) {
       }),
     });
     const result = await reponse.json();
-    console.log(result);
+
     return result;
   } catch (error) {
     console.error("POST/there was an error when creating a user"), error;
@@ -24,7 +24,7 @@ export async function RegisterUser(firstName, lastName, email, password) {
 
 export async function LoginUser(email, password) {
   try {
-    const reponse = await fetch(`${BASE_API}/users/login`, {
+    const reponse = await fetch(`${BASE_API}/api/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -33,6 +33,7 @@ export async function LoginUser(email, password) {
       }),
     });
     const result = await reponse.json();
+
     return result;
   } catch (error) {
     console.error("there was an error in your login request", error);

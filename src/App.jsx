@@ -1,11 +1,20 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import bookLogo from "./assets/books.png";
 import { Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 function App() {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
 
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+    } else {
+      localStorage.removeItem("token");
+    }
+  }, [token]);
   return (
     <>
       <h1>
@@ -31,11 +40,8 @@ function App() {
       <Routes>
         <Route path="/book" element="placeholder" />
         <Route path="account" element="placeholder" />
-        <Route
-          path="/register"
-          element={<Register setToken={setToken} token={token} />}
-        />
-        <Route path="" element="placeholder" />
+        <Route path="/register" element={<Register setToken={setToken} />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="" element="placeholder" />
       </Routes>
     </>

@@ -2,6 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import { RegisterUser } from "./auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Register({ setToken, token }) {
   const [firstName, setFirstName] = useState("");
@@ -13,7 +14,7 @@ export default function Register({ setToken, token }) {
     e.preventDefault();
     const newUser = await RegisterUser(firstName, lastName, email, password);
     setToken(newUser.token);
-    console.log(token);
+    nav("/book");
     setFirstName("");
     setLastName("");
     setEmail("");
@@ -26,6 +27,7 @@ export default function Register({ setToken, token }) {
         <label htmlFor="firstName">First name:</label>
         <input
           type="text"
+          id="firstName"
           name="firstName"
           value={firstName}
           required
@@ -35,6 +37,7 @@ export default function Register({ setToken, token }) {
         <label htmlFor="lastName">Last name:</label>
         <input
           type="text"
+          id="lastName"
           name="lastName"
           value={lastName}
           required
@@ -44,6 +47,7 @@ export default function Register({ setToken, token }) {
         <label htmlFor="email">Email:</label>
         <input
           type="email"
+          id="email"
           name="email"
           value={email}
           required
@@ -53,6 +57,7 @@ export default function Register({ setToken, token }) {
         <label htmlFor="password">Password:</label>
         <input
           type="text"
+          id="password"
           name="password"
           value={password}
           required
