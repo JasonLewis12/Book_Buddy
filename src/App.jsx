@@ -1,6 +1,7 @@
 import { useState } from "react";
 import bookLogo from "./assets/books.png";
 import { Route, Routes } from "react-router-dom";
+import Register from "./components/Register";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -28,9 +29,12 @@ function App() {
         views of your single page application!
       </p>
       <Routes>
-        <Route path="" element="placeholder" />
-        <Route path="" element="placeholder" />
-        <Route path="" element="placeholder" />
+        <Route path="/book" element="placeholder" />
+        <Route path="account" element="placeholder" />
+        <Route
+          path="/register"
+          element={<Register setToken={setToken} token={token} />}
+        />
         <Route path="" element="placeholder" />
         <Route path="" element="placeholder" />
       </Routes>
