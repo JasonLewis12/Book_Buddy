@@ -2,9 +2,10 @@
 import React from "react";
 import { LoginUser } from "./auth";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import Register from "./Register";
 import "./form.css";
-export default function Login({ setToken, token }) {
+export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const nav = useNavigate("");
@@ -19,6 +20,10 @@ export default function Login({ setToken, token }) {
   }
   return (
     <>
+      <br />
+      <br />
+      <br />
+      <br />
       <form className="form" onSubmit={fetchUser}>
         <span className="input-span">
           <label htmlFor="email">Email</label>
@@ -44,8 +49,13 @@ export default function Login({ setToken, token }) {
           />
         </span>
         <br />
-        <input class="submit" type="submit" />
+        <input className="submit" type="submit" />
       </form>
+      <Routes>
+        <Route path="/Register/*" element={<Register setToken={setToken} />} />
+      </Routes>
+      <h3> don't have an account? Register!</h3>
+      <Link to={"/Register/*"}>sign up!</Link>
     </>
   );
 }

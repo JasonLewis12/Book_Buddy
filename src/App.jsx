@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import bookLogo from "./assets/books.png";
-import { Route, Routes } from "react-router-dom";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import { Route, Routes, Link } from "react-router-dom";
+import NavBar from "./components/Navigations";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
@@ -17,6 +16,9 @@ function App() {
   }, [token]);
   return (
     <>
+      <NavBar token={token} setToken={setToken} />
+      <br />
+      <br />
       <h1>
         <img id="logo-image" src={bookLogo} />
         Library App
@@ -37,13 +39,6 @@ function App() {
         Don't forget to set up React Router to navigate between the different
         views of your single page application!
       </p>
-      <Routes>
-        <Route path="/book" element="placeholder" />
-        <Route path="account" element="placeholder" />
-        <Route path="/register" element={<Register setToken={setToken} />} />
-        <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="" element="placeholder" />
-      </Routes>
     </>
   );
 }
