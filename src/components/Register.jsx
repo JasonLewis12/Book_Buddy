@@ -3,13 +3,16 @@ import React from "react";
 import { useState } from "react";
 import { RegisterUser } from "./auth";
 import { useNavigate } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
+import Login from "./Login";
 import "./form.css";
 
-export default function Register({ setToken, token }) {
+export default function Register({ setToken }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const nav = useNavigate("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,6 +26,8 @@ export default function Register({ setToken, token }) {
   }
   return (
     <>
+      <br />
+      <br />
       <h1>Register!</h1>
       <form className="form" onSubmit={handleSubmit}>
         <span className="input-span">
@@ -75,6 +80,11 @@ export default function Register({ setToken, token }) {
         </span>
         <br />
         <input type="submit" />
+        <Routes>
+          <Route path="/login/*" element={<Login setToken={setToken} />} />
+        </Routes>
+        <h3> Already have an account?</h3>
+        <Link to={"/login/*"}>Login!</Link>
       </form>
     </>
   );
