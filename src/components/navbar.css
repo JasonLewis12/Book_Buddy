@@ -1,0 +1,27 @@
+.nav-bar {
+  display: flex;
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  background-color: lightblue;
+  box-shadow: 0 0 12px -2px black;
+  max-height: 5rem;
+  justify-content: space-evenly;
+}
+
+.nav-bar a:nth-child(5) {
+  margin-left: auto;
+}
+.nav-items {
+  background-color: lightblue;
+  margin: 15px;
+  text-decoration: none;
+  color: black;
+  padding: 0px;
+}
+
+.nav-bar :hover {
+  background-color: lightblue;
+  margin: 16px;
+  padding: 0px;
+}

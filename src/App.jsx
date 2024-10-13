@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import bookLogo from "./assets/books.png";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import NavBar from "./components/Navigations";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
@@ -17,6 +18,7 @@ function App() {
   }, [token]);
   return (
     <>
+      <NavBar token={token} />
       <h1>
         <img id="logo-image" src={bookLogo} />
         Library App
