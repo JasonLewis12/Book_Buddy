@@ -4,6 +4,8 @@ import bookLogo from "./assets/books.png";
 import { Route, Routes, Link } from "react-router-dom";
 import NavBar from "./components/Navigations";
 
+import Books from "./components/Books";
+
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
@@ -17,6 +19,7 @@ function App() {
   return (
     <>
       <NavBar token={token} setToken={setToken} />
+      <Books />
       <br />
       <br />
       <h1>
