@@ -5,7 +5,9 @@ import { useState } from "react";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import Register from "./Register";
 import "./form.css";
-export default function Login({ setToken }) {
+import AccountPage from "./Account";
+import Books from "./Books";
+export default function Login({ setToken, token }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const nav = useNavigate("");
@@ -52,10 +54,12 @@ export default function Login({ setToken }) {
         <input className="submit" type="submit" />
       </form>
       <Routes>
-        <Route path="/Register/*" element={<Register setToken={setToken} />} />
+        <Route path="/" element={<Books />} />
+        <Route path="/Register" element={<Register setToken={setToken} />} />
+        <Route path="/account" element={<AccountPage token={token} />} />
       </Routes>
       <h3> don't have an account? Register!</h3>
-      <Link to={"/Register/*"}>sign up!</Link>
+      <Link to={"/Register"}>sign up!</Link>
     </>
   );
 }

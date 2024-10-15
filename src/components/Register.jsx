@@ -4,10 +4,12 @@ import { useState } from "react";
 import { RegisterUser } from "./auth";
 import { useNavigate } from "react-router-dom";
 import { Routes, Route, Link } from "react-router-dom";
+import AccountPage from "./Account";
 import Login from "./Login";
+import Books from "./Books";
 import "./form.css";
 
-export default function Register({ setToken }) {
+export default function Register({ setToken, token }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -81,10 +83,12 @@ export default function Register({ setToken }) {
         <br />
         <input type="submit" />
         <Routes>
-          <Route path="/login/*" element={<Login setToken={setToken} />} />
+          <Route path="/" element={<Books />} />
+          <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route path="/account" element={<AccountPage token={token} />} />
         </Routes>
         <h3> Already have an account?</h3>
-        <Link to={"/login/*"}>Login!</Link>
+        <Link to={"/login"}>Login!</Link>
       </form>
     </>
   );

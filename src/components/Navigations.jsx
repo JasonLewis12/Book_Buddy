@@ -4,6 +4,8 @@ import "../index.css";
 import { Route, Routes, Link } from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
+import Books from "./Books";
+import AccountPage from "./Account";
 export default function NavBar({ setToken, token }) {
   function handleClick() {}
 
@@ -23,8 +25,8 @@ export default function NavBar({ setToken, token }) {
         </nav>
       </section>
       <Routes>
-        <Route path="/book" element="placeholder" />
-        <Route path="/account" element="placeholder" />
+        <Route path="/" element={<Books />} />
+        <Route path="/account" element={<AccountPage token={token} />} />
         <Route path="/Register" element={<Register setToken={setToken} />} />
         <Route path="/login/" element={<Login setToken={setToken} />} />
         {/* <Route path="" element="placeholder" /> */}

@@ -19,9 +19,9 @@ function App() {
   return (
     <>
       <NavBar token={token} setToken={setToken} />
+      <br />
+      <br />
       <Books />
-      <br />
-      <br />
       <h1>
         <img id="logo-image" src={bookLogo} />
         Library App
