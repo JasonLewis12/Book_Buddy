@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { Routes, Route, Link } from "react-router-dom";
 import AccountPage from "./Account";
 import Login from "./Login";
-import Books from "./Books";
 import "./form.css";
 
 export default function Register({ setToken, token }) {
@@ -14,17 +13,20 @@ export default function Register({ setToken, token }) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setuser] = useState();
   const nav = useNavigate("");
 
   async function handleSubmit(e) {
     e.preventDefault();
     const newUser = await RegisterUser(firstName, lastName, email, password);
+    console.log(newUser);
+    setuser(newUser);
     setToken(newUser.token);
     setFirstName("");
     setLastName("");
     setEmail("");
     setPassword("");
-    nav("/book");
+    nav("/");
   }
   return (
     <>
@@ -83,9 +85,8 @@ export default function Register({ setToken, token }) {
         <br />
         <input type="submit" />
         <Routes>
-          <Route path="/" element={<Books />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
-          <Route path="/account" element={<AccountPage token={token} />} />
+          <Route path="/account" element={<AccountPage user={user} />} />
         </Routes>
         <h3> Already have an account?</h3>
         <Link to={"/login"}>Login!</Link>

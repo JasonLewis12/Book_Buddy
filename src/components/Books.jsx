@@ -7,7 +7,6 @@ const Books = () => {
   useEffect(() => {
     async function getAllBooks() {
       const allBooks = await fetchAllBooks();
-      console.log(allBooks);
       setBooks(allBooks);
     }
     getAllBooks();

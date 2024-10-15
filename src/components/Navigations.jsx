@@ -24,13 +24,6 @@ export default function NavBar({ setToken, token }) {
           )}
         </nav>
       </section>
-      <Routes>
-        <Route path="/" element={<Books />} />
-        <Route path="/account" element={<AccountPage token={token} />} />
-        <Route path="/Register" element={<Register setToken={setToken} />} />
-        <Route path="/login/" element={<Login setToken={setToken} />} />
-        {/* <Route path="" element="placeholder" /> */}
-      </Routes>
     </>
   );
 }
