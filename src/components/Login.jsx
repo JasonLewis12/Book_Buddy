@@ -2,8 +2,7 @@
 import React from "react";
 import { LoginUser } from "./auth";
 import { useState } from "react";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
-import Register from "./Register";
+import { Link, useNavigate } from "react-router-dom";
 import "./form.css";
 export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
@@ -13,10 +12,11 @@ export default function Login({ setToken }) {
     e.preventDefault();
 
     const user = await LoginUser(email, password);
+
     setToken(user.token);
     setEmail("");
     setPassword("");
-    nav("/book");
+    nav("/");
   }
   return (
     <>
@@ -42,6 +42,7 @@ export default function Login({ setToken }) {
           <input
             type="password"
             id="password"
+            autoComplete="current-password"
             name="password"
             value={password}
             required
@@ -51,11 +52,8 @@ export default function Login({ setToken }) {
         <br />
         <input className="submit" type="submit" />
       </form>
-      <Routes>
-        <Route path="/Register/*" element={<Register setToken={setToken} />} />
-      </Routes>
       <h3> don't have an account? Register!</h3>
-      <Link to={"/Register/*"}>sign up!</Link>
+      <Link to={"/Register"}>sign up!</Link>
     </>
   );
 }

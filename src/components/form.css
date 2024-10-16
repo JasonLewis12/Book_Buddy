@@ -22,8 +22,8 @@
 .form input[type="email"],
 .form input[id="password"],
 .form input[type="password"],
-.form input[id="lastName"],
-.form input[id="firstName"] {
+.form input[id="lastname"],
+.form input[id="firstname"] {
   border-radius: 0.5rem;
   padding: 1rem 0.75rem;
   width: 100%;
