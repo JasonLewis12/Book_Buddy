@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import bookLogo from "./assets/books.png";
-import accountPage from "./components/Account";
+import AccountPage from "./components/Account";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/Navigations";
 import Register from "./components/Register";
 import Login from "./components/Login";
-
 import Books from "./components/Books";
 
 function App() {
@@ -32,7 +31,7 @@ function App() {
         <Route path="/" element={<Books />} />
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/account" element={<accountPage token={token} />} />
+        <Route path="/account" element={<AccountPage token={token} />} />
       </Routes>
     </>
   );

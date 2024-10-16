@@ -21,13 +21,13 @@ export const fetchSingleBook = async (bookId) => {
 };
 
 // Update books from API
-export const checkoutBook = async (bookId) => {
+export const checkoutBook = async (bookId, token) => {
   try {
     const response = await fetch(`${API_URL}/books/${bookId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${TOKEN_STRING_HERE}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         available: false,
@@ -39,16 +39,3 @@ export const checkoutBook = async (bookId) => {
     console.error(error);
   }
 };
-
-//get login info
-export async function getUserInfo(token) {
-  const response = await fetch(`${API_URL}/api/users/me`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  const result = await response.json();
-  return result;
-}

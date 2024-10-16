@@ -1,10 +1,8 @@
-import { json } from "react-router-dom";
-
 const BASE_API = "https://fsa-book-buddy-b6e748d1380d.herokuapp.com";
 
 export async function RegisterUser(firstName, lastName, email, password) {
   try {
-    const reponse = await fetch(`${BASE_API}/api/users/register`, {
+    const response = await fetch(`${BASE_API}/api/users/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -14,7 +12,7 @@ export async function RegisterUser(firstName, lastName, email, password) {
         password,
       }),
     });
-    const result = await reponse.json();
+    const result = await response.json();
 
     return result;
   } catch (error) {
@@ -38,4 +36,16 @@ export async function LoginUser(email, password) {
   } catch (error) {
     console.error("there was an error in your login request", error);
   }
+}
+
+export async function getUserInfo(token) {
+  const response = await fetch(`${BASE_API}/api/users/me`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await response.json();
+  return result;
 }

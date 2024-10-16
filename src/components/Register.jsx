@@ -3,24 +3,19 @@ import React from "react";
 import { useState } from "react";
 import { RegisterUser } from "./auth";
 import { useNavigate } from "react-router-dom";
-import { Routes, Route, Link } from "react-router-dom";
-import AccountPage from "./Account";
-import Login from "./Login";
+import { Link } from "react-router-dom";
 import "./form.css";
 
-export default function Register({ setToken, token }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+export default function Register({ setToken }) {
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setuser] = useState();
   const nav = useNavigate("");
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const newUser = await RegisterUser(firstName, lastName, email, password);
-    console.log(newUser);
-    setuser(newUser);
+    const newUser = await RegisterUser(firstname, lastname, email, password);
     setToken(newUser.token);
     setFirstName("");
     setLastName("");
@@ -35,31 +30,31 @@ export default function Register({ setToken, token }) {
       <h1>Register!</h1>
       <form className="form" onSubmit={handleSubmit}>
         <span className="input-span">
-          <label htmlFor="firstName">First name:</label>
+          <label htmlFor="firstname">First name</label>
           <input
             type="text"
-            id="firstName"
+            id="firstname"
             name="firstName"
-            value={firstName}
+            value={firstname}
             required
             onChange={(e) => setFirstName(e.target.value)}
           />
         </span>
         <br />
         <span className="input-span">
-          <label htmlFor="lastName">Last name:</label>
+          <label htmlFor="lastname">Last name</label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
-            value={lastName}
+            id="lastname"
+            name="lastname"
+            value={lastname}
             required
             onChange={(e) => setLastName(e.target.value)}
           />
         </span>
         <br />
         <span className="input-span">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -71,9 +66,10 @@ export default function Register({ setToken, token }) {
         </span>
         <br />
         <span className="input-span">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password</label>
           <input
-            type="text"
+            type="password"
+            autoComplete="current-password"
             id="password"
             name="password"
             value={password}
@@ -83,11 +79,7 @@ export default function Register({ setToken, token }) {
           />
         </span>
         <br />
-        <input type="submit" />
-        <Routes>
-          <Route path="/login" element={<Login setToken={setToken} />} />
-          <Route path="/account" element={<AccountPage user={user} />} />
-        </Routes>
+        <input className="submit" type="submit" />
         <h3> Already have an account?</h3>
         <Link to={"/login"}>Login!</Link>
       </form>
