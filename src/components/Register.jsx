@@ -25,11 +25,9 @@ export default function Register({ setToken }) {
   }
   return (
     <>
-      <br />
-      <br />
-      <h1>Register!</h1>
-      <form className="form" onSubmit={handleSubmit}>
-        <span className="input-span">
+      <div className="form-container">
+        <form className="form" onSubmit={handleSubmit}>
+          <h1>Register!</h1>
           <label htmlFor="firstname">First name</label>
           <input
             type="text"
@@ -39,9 +37,6 @@ export default function Register({ setToken }) {
             required
             onChange={(e) => setFirstName(e.target.value)}
           />
-        </span>
-        <br />
-        <span className="input-span">
           <label htmlFor="lastname">Last name</label>
           <input
             type="text"
@@ -51,9 +46,6 @@ export default function Register({ setToken }) {
             required
             onChange={(e) => setLastName(e.target.value)}
           />
-        </span>
-        <br />
-        <span className="input-span">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -63,9 +55,6 @@ export default function Register({ setToken }) {
             required
             onChange={(e) => setEmail(e.target.value)}
           />
-        </span>
-        <br />
-        <span className="input-span">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -77,12 +66,11 @@ export default function Register({ setToken }) {
             minLength={8}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </span>
-        <br />
-        <input className="submit" type="submit" />
-        <h3> Already have an account?</h3>
-        <Link to={"/login"}>Login!</Link>
-      </form>
+          <input className="submit" type="submit" />
+          <h3> Already have an account?</h3>
+          <Link to={"/login"}>Login!</Link>
+        </form>
+      </div>
     </>
   );
 }

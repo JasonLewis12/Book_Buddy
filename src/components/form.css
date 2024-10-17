@@ -1,3 +1,11 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full screen height */
+  width: 100vw; /* Full screen width */
+}
+
 .form {
   --bg-light: #efefef;
   --bg-dark: #707070;
