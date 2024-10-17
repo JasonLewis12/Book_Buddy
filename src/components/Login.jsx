@@ -20,12 +20,9 @@ export default function Login({ setToken }) {
   }
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <form className="form" onSubmit={fetchUser}>
-        <span className="input-span">
+      <div className="form-container">
+        <form className="form" onSubmit={fetchUser}>
+          <h1 className="form">Login</h1>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -35,9 +32,7 @@ export default function Login({ setToken }) {
             required
             onChange={(e) => setEmail(e.target.value)}
           />
-        </span>
-        <br />
-        <span className="input-span">
+          <br />
           <label htmlFor="password">password</label>
           <input
             type="password"
@@ -48,12 +43,12 @@ export default function Login({ setToken }) {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
-        </span>
-        <br />
-        <input className="submit" type="submit" />
-      </form>
-      <h3> don't have an account? Register!</h3>
-      <Link to={"/Register"}>sign up!</Link>
+          <br />
+          <input className="submit" type="submit" />
+          <h3> don't have an account? Register!</h3>
+          <Link to={"/Register"}>sign up!</Link>
+        </form>
+      </div>
     </>
   );
 }

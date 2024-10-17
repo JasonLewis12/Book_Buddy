@@ -3,9 +3,10 @@ import React from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-export default function NavBar({ token }) {
+export default function NavBar({ token, setToken }) {
   const nav = useNavigate();
   function handleClick(e) {
+    setToken(null);
     localStorage.removeItem("token");
     console.log("test");
     nav("/login");
