@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { fetchAllBooks } from "../api";
+import { fetchAllBooks, checkoutBook } from "../api";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../index.css";
 
-export default function SearchBar() {
+export default function SearchBar({ token }) {
   const [search, setSearch] = useState("");
   const [books, setBooks] = useState([]);
+  const move = useNavigate();
 
   useEffect(() => {
-    async function getBookInfo() {
-      const bookinfo = await fetchAllBooks();
-      setBooks(bookinfo);
-    }
+    const getBookInfo = async () => {
+      const bookInfo = await fetchAllBooks();
+      setBooks(bookInfo);
+    };
     getBookInfo();
   }, []);
 
   const filterBooks = (searchTerm) => {
-    if (!searchTerm) {
-      return [];
-    }
+    if (!searchTerm) return [];
     return books.filter((book) =>
       book.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
+  };
+
+  const handleCheckout = async (bookId) => {
+    const checkout = await checkoutBook(bookId, token, false);
+    console.log(checkout);
+    move("/account");
+    return checkout;
   };
 
   const filteredBooks = filterBooks(search);
@@ -36,21 +44,35 @@ export default function SearchBar() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <ul>
-        {filteredBooks.length > 0
-          ? filteredBooks.map((book) => (
-              <li key={book.id}>
-                <h1>Title: {book.title}</h1>
-                <img
-                  className="bookimg"
-                  src={book.coverimage}
-                  alt={book.title}
-                />
-                <h3>author: {book.author}</h3>
-              </li>
-            ))
-          : ""}
-      </ul>
+      <div className="card-container">
+        {filteredBooks.length > 0 ? (
+          filteredBooks.map((book) => (
+            <div className="card" key={book.id}>
+              <h1>{book.title}</h1>
+              <img src={book.coverimage} className="bookimg" alt={book.title} />
+              <h3>{book.author}</h3>
+              {book.available ? (
+                token ? (
+                  <button
+                    className="buttion"
+                    onClick={() => handleCheckout(book.id)}
+                  >
+                    Checkout this book
+                  </button>
+                ) : (
+                  <Link to="/Login">
+                    <p>Sign up or login to checkout a book!</p>
+                  </Link>
+                )
+              ) : (
+                <p>This book is currently unavailable.</p>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No books found.</p>
+        )}
+      </div>
     </>
   );
 }
