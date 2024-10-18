@@ -22,7 +22,7 @@ export default function Login({ setToken }) {
     <>
       <div className="form-container">
         <form className="form" onSubmit={fetchUser}>
-          <h1 className="form">Login</h1>
+          <h1 className="form">Login!</h1>
           <label htmlFor="email">Email</label>
           <input
             type="email"
