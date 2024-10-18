@@ -20,8 +20,8 @@ export default function AccountPage({ token }) {
     <>
       <br />
       <br />
-      <h1>welcome back{firstname}</h1>
-      <p>your email is {email}</p>
+      <h1>welcome back {firstname}</h1>
+      <p>your email is: {email}</p>
       <br />
       <h2>your check out books:</h2>
       {books}
