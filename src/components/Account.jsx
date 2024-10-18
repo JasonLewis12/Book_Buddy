@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getUserInfo } from "./auth";
 import { returnBook } from "../api";
+import "../index.css";
 
 export default function AccountPage({ token }) {
   const [firstname, setFirstName] = useState("");
@@ -41,14 +42,17 @@ export default function AccountPage({ token }) {
       <p>Your email is: {email}</p>
       <br />
       <h2>Your checked-out books:</h2>
-      <ul>
+      <ul className="card-container">
         {books.map((book) => (
-          <li key={book.id}>
+          <li className="card" key={book.id}>
             <h1>{book.title}</h1>
             <img src={book.coverimage} className="bookimg" alt={book.title} />
             <h3>{book.author}</h3>
             {console.log(book.id)}
-            <button onClick={() => handleReturnBook(book.id)}>
+            <button
+              className="buttion"
+              onClick={() => handleReturnBook(book.id)}
+            >
               return book
             </button>
           </li>
