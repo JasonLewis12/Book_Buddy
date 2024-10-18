@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getUserInfo } from "./auth";
+import { returnBook } from "../api";
 
 export default function AccountPage({ token }) {
   const [firstname, setFirstName] = useState("");
@@ -13,14 +14,24 @@ export default function AccountPage({ token }) {
         setFirstName(user.firstname);
         setEmail(user.email);
         setBooks(user.books);
-        console.log(user);
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
     };
     login();
   }, []);
+
   console.log(books);
+
+  async function handleReturnBook(booksid) {
+    try {
+      const returninfo = await returnBook(booksid, token);
+      return returninfo;
+    } catch (error) {
+      console.error("Error returning book:", error);
+    }
+  }
+
   return (
     <>
       <br />
@@ -30,17 +41,17 @@ export default function AccountPage({ token }) {
       <br />
       <h2>Your checked-out books:</h2>
       <ul>
-        {books.map((books) => {
-          <li key={books.id}>
-            <h1>{books.title}</h1>
-            <img
-              src={books.coverimage}
-              className="bookimg"
-              alt={books.title}
-            ></img>
-            <h3>{books.author}</h3>
-          </li>;
-        })}
+        {books.map((book) => (
+          <li key={book.id}>
+            <h1>{book.title}</h1>
+            <img src={book.coverimage} className="bookimg" alt={book.title} />
+            <h3>{book.author}</h3>
+            {console.log(book.id)}
+            <button onClick={() => handleReturnBook(book.id)}>
+              return book
+            </button>
+          </li>
+        ))}
       </ul>
     </>
   );

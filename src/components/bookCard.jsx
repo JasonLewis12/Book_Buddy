@@ -1,6 +1,5 @@
 import react from "react";
 import { checkoutBook } from "../api";
-
 export default function BookCard({ bookList, token }) {
   async function handleClick() {
     if (bookList.available === true) {

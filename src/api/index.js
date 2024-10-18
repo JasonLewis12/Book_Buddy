@@ -41,3 +41,24 @@ export const checkoutBook = async (bookId, token, boolean) => {
     console.error(error);
   }
 };
+
+export async function returnBook(bookId, token) {
+  try {
+    const response = await fetch(`${API_URL}/books/${bookId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        available: true,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    console.log(`${API_URL}/books/${bookId}`);
+    return result;
+  } catch (error) {
+    console.error("there was on error updating books", error);
+  }
+}

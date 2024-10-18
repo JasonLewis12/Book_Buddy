@@ -15,11 +15,7 @@ const Books = ({ token }) => {
   return (
     <>
       {books.map((book) => {
-        return (
-          <div>
-            <BookCard key={book.Id} bookList={book} token={token} />
-          </div>
-        );
+        return <BookCard key={book.Id} bookList={book} token={token} />;
       })}
     </>
   );
