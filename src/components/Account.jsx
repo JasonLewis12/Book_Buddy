@@ -26,6 +26,7 @@ export default function AccountPage({ token }) {
   async function handleReturnBook(booksid) {
     try {
       const returninfo = await returnBook(booksid, token);
+      setBooks((prevBooks) => prevBooks.filter((book) => book.id !== booksid));
       return returninfo;
     } catch (error) {
       console.error("Error returning book:", error);

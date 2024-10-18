@@ -1,5 +1,3 @@
-import { forwardRef } from "react";
-
 const API_URL = "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api";
 // Fetch All Books from API
 export const fetchAllBooks = async () => {
@@ -44,15 +42,12 @@ export const checkoutBook = async (bookId, token, boolean) => {
 
 export async function returnBook(bookId, token) {
   try {
-    const response = await fetch(`${API_URL}/books/${bookId}`, {
-      method: "PATCH",
+    const response = await fetch(`${API_URL}/reservations/${bookId}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        available: true,
-      }),
     });
     const result = await response.json();
     console.log(result);

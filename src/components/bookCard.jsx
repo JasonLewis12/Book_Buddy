@@ -1,5 +1,6 @@
 import react from "react";
 import { checkoutBook } from "../api";
+import { Link } from "react-router-dom";
 export default function BookCard({ bookList, token }) {
   async function handleClick() {
     if (bookList.available === true) {
@@ -17,9 +18,20 @@ export default function BookCard({ bookList, token }) {
       ></img>
       <h3>{bookList.author}</h3>
       {bookList.available ? (
-        <button onClick={() => handleClick()}>Checkout this book</button>
+        token ? (
+          <button onClick={handleClick}>Checkout this book</button>
+        ) : (
+          <Link to={"/Login"}>
+            <p>Sign up or login to checkout a book!</p>
+          </Link>
+        )
       ) : (
-        <h3>Not available please check back later</h3>
+        <p>This book is currently unavailable.</p>
+      )}
+      {!token && (
+        <Link to={"/Login"}>
+          <p>Sign up or login to checkout a book!</p>
+        </Link>
       )}
     </div>
   );
