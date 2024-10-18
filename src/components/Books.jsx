@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchAllBooks } from "../api";
 import BookCard from "./bookCard";
 
-const Books = () => {
+const Books = ({ token }) => {
   const [books, setBooks] = useState([]);
   useEffect(() => {
     async function getAllBooks() {
@@ -17,7 +17,7 @@ const Books = () => {
       {books.map((book) => {
         return (
           <div>
-            <BookCard key={book.Id} bookList={book} />
+            <BookCard key={book.Id} bookList={book} token={token} />
           </div>
         );
       })}

@@ -10,7 +10,6 @@ export default function SearchBar() {
     async function getBookInfo() {
       const bookinfo = await fetchAllBooks();
       setBooks(bookinfo);
-      console.log(bookinfo);
     }
     getBookInfo();
   }, []);
@@ -19,8 +18,8 @@ export default function SearchBar() {
     if (!searchTerm) {
       return [];
     }
-    return books.filter(
-      (book) => book.title.toLowerCase().includes(searchTerm.toLowerCase()) // Case-insensitive search
+    return books.filter((book) =>
+      book.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 

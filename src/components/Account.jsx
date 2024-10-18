@@ -1,30 +1,47 @@
-/* TODO - add your code to create a functional React component that renders account details for a logged in user. Fetch the account data from the provided API. You may consider conditionally rendering a message for other users that prompts them to log in or create an account.  */
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getUserInfo } from "./auth";
 
 export default function AccountPage({ token }) {
   const [firstname, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [books, setBooks] = useState("");
+  const [books, setBooks] = useState([]);
 
-  const login = async () => {
-    const user = await getUserInfo(token);
-    setFirstName(user.firstname);
-    setEmail(user.email);
-    setBooks(user.books);
-    return user;
-  };
-  login();
+  useEffect(() => {
+    const login = async () => {
+      try {
+        const user = await getUserInfo(token);
+        setFirstName(user.firstname);
+        setEmail(user.email);
+        setBooks(user.books);
+        console.log(user);
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    };
+    login();
+  }, []);
+  console.log(books);
   return (
     <>
       <br />
       <br />
-      <h1>welcome back {firstname}</h1>
-      <p>your email is: {email}</p>
+      <h1>Welcome back, {firstname}</h1>
+      <p>Your email is: {email}</p>
       <br />
-      <h2>your check out books:</h2>
-      {books}
+      <h2>Your checked-out books:</h2>
+      <ul>
+        {books.map((books) => {
+          <li key={books.id}>
+            <h1>{books.title}</h1>
+            <img
+              src={books.coverimage}
+              className="bookimg"
+              alt={books.title}
+            ></img>
+            <h3>{books.author}</h3>
+          </li>;
+        })}
+      </ul>
     </>
   );
 }
