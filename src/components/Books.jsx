@@ -1,6 +1,7 @@
 /* TODO - add your code to create a functional React component that displays all of the available 6books6 in the library's catalog. Fetch the book data from the provided API. Users should be able to click on an individual book to navigate to the SingleBook component and view its details. */
 import { useEffect, useState } from "react";
 import { fetchAllBooks } from "../api";
+import BookCard from "./bookCard";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -14,7 +15,11 @@ const Books = () => {
   return (
     <>
       {books.map((book) => {
-        return <div>{book.title}</div>;
+        return (
+          <div>
+            <BookCard key={book.Id} bookList={book} />
+          </div>
+        );
       })}
     </>
   );
