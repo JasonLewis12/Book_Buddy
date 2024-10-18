@@ -12,6 +12,16 @@ body {
 
 /* Add your own custom styles here */
 
+.bookimg {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin: 20px auto;
+}
+
 .nav-bar {
   display: flex;
   position: fixed;

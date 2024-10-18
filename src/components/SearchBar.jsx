@@ -1,37 +1,57 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchAllBooks } from "../api";
+import "../index.css";
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
-  const [book, setBook] = useState([]);
+  const [books, setBooks] = useState([]);
 
-  async function getBooks() {
-    const bookInfo = await fetchAllBooks();
-    console.log(bookInfo);
-    setBook(bookInfo);
-    return bookInfo;
-  }
-  getBooks();
-  const filter = (search) => {
-    if (!search) {
-      <h1>No mathcing books</h1>;
-      return;
-    } else {
-      return search.filter();
+  useEffect(() => {
+    async function getBookInfo() {
+      const bookinfo = await fetchAllBooks();
+      setBooks(bookinfo);
+      console.log(bookinfo);
     }
+    getBookInfo();
+  }, []);
+
+  const filterBooks = (searchTerm) => {
+    if (!searchTerm) {
+      return [];
+    }
+    return books.filter(
+      (book) => book.title.toLowerCase().includes(searchTerm.toLowerCase()) // Case-insensitive search
+    );
   };
+
+  const filteredBooks = filterBooks(search);
+
   return (
     <>
-      <br />
-      <br />
       <h1>Search for a book!</h1>
-      <label htmlFor="search">search</label>
+      <label htmlFor="search">Search:</label>
       <input
         type="text"
         name="search"
+        value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+
+      <ul>
+        {filteredBooks.length > 0
+          ? filteredBooks.map((book) => (
+              <li key={book.id}>
+                <h1>Title: {book.title}</h1>
+                <img
+                  className="bookimg"
+                  src={book.coverimage}
+                  alt={book.title}
+                />
+                <h3>author: {book.author}</h3>
+              </li>
+            ))
+          : ""}
+      </ul>
     </>
   );
 }

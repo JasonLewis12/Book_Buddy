@@ -33,7 +33,7 @@ function App() {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/account" element={<AccountPage token={token} />} />
-        <Route path="/search" element={<SearchBar />} />
+        <Route path="/search" element={<SearchBar token={token} />} />
       </Routes>
     </>
   );
