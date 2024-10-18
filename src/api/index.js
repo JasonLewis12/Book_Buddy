@@ -21,7 +21,7 @@ export const fetchSingleBook = async (bookId) => {
 };
 
 // Update books from API
-export const checkoutBook = async (bookId, token) => {
+export const checkoutBook = async (bookId, token, boolean) => {
   try {
     const response = await fetch(`${API_URL}/books/${bookId}`, {
       method: "PATCH",
@@ -30,7 +30,7 @@ export const checkoutBook = async (bookId, token) => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        available: false,
+        available: `${boolean}`,
       }),
     });
     const result = await response.json();
@@ -39,3 +39,21 @@ export const checkoutBook = async (bookId, token) => {
     console.error(error);
   }
 };
+
+export async function returnBook(bookId, token) {
+  try {
+    const response = await fetch(`${API_URL}/reservations/${bookId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    console.log(`${API_URL}/books/${bookId}`);
+    return result;
+  } catch (error) {
+    console.error("there was on error updating books", error);
+  }
+}

@@ -19,6 +19,7 @@ function App() {
       localStorage.removeItem("token");
     }
   }, [token]);
+
   return (
     <>
       <NavBar token={token} setToken={setToken} />
@@ -29,7 +30,7 @@ function App() {
         Library App
       </h1>
       <Routes>
-        <Route path="/" element={<Books />} />
+        <Route path="/" element={<Books token={token} />} />
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/account" element={<AccountPage token={token} />} />
