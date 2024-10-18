@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export default function NavBar({ token, setToken }) {
   const nav = useNavigate();
-  function handleClick(e) {
+  function handleClick() {
     setToken(null);
     localStorage.removeItem("token");
     console.log("test");
@@ -17,6 +17,9 @@ export default function NavBar({ token, setToken }) {
         <nav className="nav-bar">
           <Link className="nav-items" to={"/"}>
             Home
+          </Link>
+          <Link className="nav-items" to={"/search"}>
+            search
           </Link>
           {token ? (
             <Link className="nav-items" to={"/account"}>

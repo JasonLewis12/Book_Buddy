@@ -7,6 +7,7 @@ import NavBar from "./components/Navigations";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Books from "./components/Books";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
@@ -32,6 +33,7 @@ function App() {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/account" element={<AccountPage token={token} />} />
+        <Route path="/search" element={<SearchBar />} />
       </Routes>
     </>
   );
